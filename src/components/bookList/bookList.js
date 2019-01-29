@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withBookstoreService } from '../hoc'
 import { booksLoaded } from '../../actions'
+import compose from '../../utils'
 
 import BookListItem from '../bookListItem/bookListItem'
 import './bookList.css'
@@ -61,4 +61,10 @@ const mapDispatchToProps = {
   booksLoaded
 }
 
-export default withBookstoreService()(connect(mapStateToProps, mapDispatchToProps)(BookList))
+
+export default compose(
+  withBookstoreService(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(BookList)
+
+// withBookstoreService()(connect(mapStateToProps, mapDispatchToProps)(BookList))
