@@ -8,7 +8,7 @@ const reducer = (state = initialState, action) => {
     case 'BOOKS_REQUESTED':
       return {
         books: [],
-        loading: true
+        loading: true,z
       }
     case 'BOOKS_LOADED':
       return {
