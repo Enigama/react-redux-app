@@ -8,8 +8,9 @@ import './shop-header.css';
 
 class ShopHeader extends Component{
   render() {
-    const {numItems, cart} = this.props
-    const price = cart > 0 ? `($${cart})`: null
+    const {count, cart} = this.props
+    const info = cart > 0 && count > 0 ? `${count} items ($${cart})` : null
+
     return (
       <header className="shop-header row">
         <Link to="/">
@@ -18,7 +19,7 @@ class ShopHeader extends Component{
         <Link to="/cart">
           <div className="shopping-cart">
             <i className="cart-icon fa fa-shopping-cart" />
-            {numItems} items {price}
+            {info}
           </div>
         </Link>
       </header>
@@ -26,8 +27,9 @@ class ShopHeader extends Component{
   }
 };
 
-const mapStateToProps = ({cart}) => {
-  return {cart}
+const mapStateToProps = ({ cart, count }) => {
+  return { cart, count }
 }
 
 export default connect(mapStateToProps)(ShopHeader);
+// https://github.com/rt2zz/redux-persist

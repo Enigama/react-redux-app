@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
 
-import {connect} from 'react-redux'
-import {booksBuy} from "../../actions";
-
 import './bookListItem.css'
 
 class BookListItem extends Component{
@@ -34,10 +31,6 @@ class BookListItem extends Component{
       </div>
     )
   }
-}
-
-const mapStateToProps = ({books}) => {
-  return {books}
 }
 
 export default BookListItem
