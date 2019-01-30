@@ -12,7 +12,15 @@ const booksRequsted = () => {
   }
 }
 
+const booksBuy = (price) => {
+  return {
+    type: 'BOOKS_BUY',
+    payload: price
+  }
+}
+
 export {
   booksLoaded,
-  booksRequsted
+  booksRequsted,
+  booksBuy,
 }

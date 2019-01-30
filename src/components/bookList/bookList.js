@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withBookstoreService } from '../hoc'
-import { booksLoaded, booksRequsted } from '../../actions'
+import { booksLoaded, booksRequsted, booksBuy } from '../../actions'
 import compose from '../../utils'
 
 import BookListItem from '../bookListItem/bookListItem'
@@ -15,7 +15,12 @@ class BookList extends Component{
     bookstoreService.getBooks()
       .then((data) => {
         booksLoaded(data)
-    })
+      })
+  }
+
+  handlerBuy = (price) => {
+    const { booksBuy, cart } = this.props
+    booksBuy(price + cart)
   }
 
   render () {
@@ -29,7 +34,7 @@ class BookList extends Component{
           books.map((book) => {
             return(
               <li key={book.id}>
-                <BookListItem book={book}/>
+                <BookListItem book={book} handlerBuy={this.handlerBuy}/>
               </li>
             )
           })
@@ -39,8 +44,8 @@ class BookList extends Component{
   }
 }
 
-const mapStateToProps = ({ books, loading }) => {
-  return { books, loading }
+const mapStateToProps = ({ books, loading, cart }) => {
+  return { books, loading, cart }
 }
                     // (dispatch) =>
 const mapDispatchToProps = {
@@ -65,6 +70,7 @@ const mapDispatchToProps = {
   // }, dispatch)
   booksLoaded,
   booksRequsted,
+  booksBuy,
 }
 
 
