@@ -6,7 +6,7 @@ import './bookListItem.css'
 class BookListItem extends Component{
 
   handlerBuy = () => {
-    this.props.handlerBuy(this.props.book.price)
+    this.props.handlerBuy(this.props.book)
   }
 
   render() {

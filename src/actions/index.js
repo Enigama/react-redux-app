@@ -12,10 +12,11 @@ const booksRequsted = () => {
   }
 }
 
-const booksBuy = (price, count) => {
+const booksBuy = (book, price, count) => {
+  console.log(book);
   return {
     type: 'BOOKS_BUY',
-    payload: {price: price, count: count},
+    payload: { book: book, price: price, count: count,}
   }
 }
 
