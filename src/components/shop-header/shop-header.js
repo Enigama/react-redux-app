@@ -2,14 +2,37 @@ import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 
 import {connect} from 'react-redux'
+import {booksBuy} from "../../actions";
 
 import './shop-header.css';
 
 
 class ShopHeader extends Component{
+
+  state = {
+    count: 0
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props !== prevProps) {
+      this.updateValue()
+    }
+  }
+
+  updateValue = () => {
+    const { booksBuy, orderBook, price } = this.props
+
+    this.setState(({count}) => {
+      return {
+        count: ++count
+      }
+    })
+    booksBuy(orderBook, price, this.state.count)
+  }
+
   render() {
-    const {count, cart} = this.props
-    const info = cart > 0 && count > 0 ? `${count} items ($${cart})` : null
+    const {price} = this.props
+    const info = price > 0 ? `${this.state.count} items ($${price})` : null
 
     return (
       <header className="shop-header row">
@@ -27,9 +50,13 @@ class ShopHeader extends Component{
   }
 };
 
-const mapStateToProps = ({ cart, count }) => {
-  return { cart, count }
+const mapStateToProps = ({ orderBook, price }) => {
+  return { orderBook, price}
 }
 
-export default connect(mapStateToProps)(ShopHeader);
+const mapDispatchToProps = {
+  booksBuy,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShopHeader);
 // https://github.com/rt2zz/redux-persist

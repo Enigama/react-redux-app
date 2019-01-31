@@ -1,34 +1,20 @@
 const initialState = {
   books: [],
   loading: true,
-  cart: null,
-  count: null
+  orderBook: [],
+  price: 0,
+  count: 0,
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'BOOKS_BUY':
-      const {price: cart, count } = action.payload
-      return {
-        books: state.books,
-        loading: false,
-        cart: cart,
-        count: count,
-      }
+    case 'BOOKS_ORDER':
+      console.log("BOOKS_ORDER", action.payload);
+      return { ...state, ...action.payload}
     case 'BOOKS_REQUESTED':
-      return {
-        books: [],
-        loading: true,
-        cart: state.cart,
-        count: state.count,
-      }
+      return {...state}
     case 'BOOKS_LOADED':
-      return {
-        books: action.payload,
-        loading: false,
-        cart: state.cart,
-        count: state.count,
-      }
+      return {...state, ...action.payload}
     default:
       return state
   }

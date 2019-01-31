@@ -9,26 +9,28 @@ import './bookList.css'
 import Spinner from "../spinner";
 
 class BookList extends Component{
-  state = {
-    count: 0
-  }
 
   componentDidMount () {
     const { bookstoreService, booksLoaded, booksRequsted } = this.props
     booksRequsted()
     bookstoreService.getBooks()
       .then((data) => {
-        booksLoaded(data)
+        const loading = false
+        booksLoaded(data, loading)
       })
   }
 
-  handlerBuy = (book) => {
-    const { booksBuy, cart } = this.props
-    let { count } = this.state
-    let price = book.price + cart
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   if (this.props.price !== prevProps.price) {
+  //     console.log(this.props.price, prevProps.price, 'aaa');
+  //   }
+  // }
 
-    this.setState({count: ++count})
-    booksBuy(book, price, count)
+  handlerBuy = (book) => {
+    const {booksBuy, price, count} = this.props
+    let newPrice = price + book.price
+    console.log(count, 'bookList');
+    booksBuy(book, newPrice, count)
   }
 
   render () {
@@ -52,8 +54,8 @@ class BookList extends Component{
   }
 }
 
-const mapStateToProps = ({ books, loading, cart }) => {
-  return { books, loading, cart }
+const mapStateToProps = ({ books, orderBook, price, count}) => {
+  return { books, orderBook, price, count}
 }
                     // (dispatch) =>
 const mapDispatchToProps = {

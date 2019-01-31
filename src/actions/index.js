@@ -1,8 +1,8 @@
 
-const booksLoaded = (newBooks) => {
+const booksLoaded = (books, loading) => {
   return {
     type: 'BOOKS_LOADED',
-    payload: newBooks
+    payload: {books: books, loading: loading}
   }
 }
 
@@ -12,16 +12,17 @@ const booksRequsted = () => {
   }
 }
 
-const booksBuy = (book, price, count) => {
-  console.log(book);
+const booksBuy = (orderBook, price, count) => {
+  console.log(count, 'action');
   return {
-    type: 'BOOKS_BUY',
-    payload: { book, price, count,}
+    type: 'BOOKS_ORDER',
+    payload: {orderBook, price, count }
   }
 }
+
 
 export {
   booksLoaded,
   booksRequsted,
-  booksBuy,
+  booksBuy
 }
