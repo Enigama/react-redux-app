@@ -8,11 +8,12 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'BOOKS_BUY':
+      const {price: cart, count } = action.payload
       return {
         books: state.books,
         loading: false,
-        cart: action.payload,
-        count: action.count,
+        cart: cart,
+        count: count,
       }
     case 'BOOKS_REQUESTED':
       return {
