@@ -9,6 +9,9 @@ import './bookList.css'
 import Spinner from "../spinner";
 
 class BookList extends Component{
+  state = {
+    count: 0
+  }
 
   componentDidMount () {
     const { bookstoreService, booksLoaded, booksRequsted } = this.props
@@ -20,17 +23,11 @@ class BookList extends Component{
       })
   }
 
-  // componentDidUpdate(prevProps, prevState, snapshot) {
-  //   if (this.props.price !== prevProps.price) {
-  //     console.log(this.props.price, prevProps.price, 'aaa');
-  //   }
-  // }
-
   handlerBuy = (book) => {
-    const {booksBuy, price, count} = this.props
+    const {booksBuy, price } = this.props
     let newPrice = price + book.price
-    console.log(count, 'bookList');
-    booksBuy(book, newPrice, count)
+    this.setState({count: ++this.state.count})
+    booksBuy(book, newPrice, this.state.count)
   }
 
   render () {

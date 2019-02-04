@@ -6,33 +6,10 @@ import {booksBuy} from "../../actions";
 
 import './shop-header.css';
 
-
 class ShopHeader extends Component{
-
-  state = {
-    count: 0
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props !== prevProps) {
-      this.updateValue()
-    }
-  }
-
-  updateValue = () => {
-    const { booksBuy, orderBook, price } = this.props
-
-    this.setState(({count}) => {
-      return {
-        count: ++count
-      }
-    })
-    booksBuy(orderBook, price, this.state.count)
-  }
-
   render() {
-    const {price} = this.props
-    const info = price > 0 ? `${this.state.count} items ($${price})` : null
+    const {price, count} = this.props
+    const info = price > 0 ? ` ${count} items ($${price})` : null
 
     return (
       <header className="shop-header row">
@@ -50,8 +27,8 @@ class ShopHeader extends Component{
   }
 };
 
-const mapStateToProps = ({ orderBook, price }) => {
-  return { orderBook, price}
+const mapStateToProps = ({ orderBook, price, count }) => {
+  return { orderBook, price, count}
 }
 
 const mapDispatchToProps = {

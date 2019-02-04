@@ -6,14 +6,14 @@ import './shopping-cart-table.css';
 class ShoppingCartTable extends Component{
 
   render() {
-    const {id, author, title} = this.props.orderBook
-    console.log(this.props.count, 'shopping');
+    const { count, price } = this.props
+    const { id, title} = this.props.orderBook
     const item = (
       <tr>
-        <td>{id}</td>
-        <td>{title}</td>
-        <td>{this.props.count}</td>
-        <td>{this.props.price}</td>
+        <td>{ id }</td>
+        <td>{ title }</td>
+        <td>{ count }</td>
+        <td>{ price }</td>
 
         <td>
           <button className="btn btn-outline-danger btn-sm float-right">
@@ -43,7 +43,7 @@ class ShoppingCartTable extends Component{
           </thead>
 
           <tbody>
-          {item}
+          { id ? item : null }
           {/*<tr>*/}
             {/*<td>1</td>*/}
             {/*<td>Site Reliability Engineering</td>*/}
@@ -66,7 +66,7 @@ class ShoppingCartTable extends Component{
         </table>
 
         <div className="total">
-          Total: $201
+          { price ? `Total: ${ price }` : null }
         </div>
       </div>
     );

@@ -13,7 +13,6 @@ const booksRequsted = () => {
 }
 
 const booksBuy = (orderBook, price, count) => {
-  console.log(count, 'action');
   return {
     type: 'BOOKS_ORDER',
     payload: {orderBook, price, count }
