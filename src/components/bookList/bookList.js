@@ -24,10 +24,12 @@ class BookList extends Component{
   }
 
   handlerBuy = (book) => {
-    const {booksBuy, price } = this.props
+    const { booksBuy, price } = this.props
     let newPrice = price + book.price
-    this.setState({count: ++this.state.count})
-    booksBuy(book, newPrice, this.state.count)
+    let count = this.state.count
+    this.setState({count: ++count})
+
+    booksBuy(book, newPrice, count)
   }
 
   render () {

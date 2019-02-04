@@ -15,7 +15,7 @@ const booksRequsted = () => {
 const booksBuy = (orderBook, price, count) => {
   return {
     type: 'BOOKS_ORDER',
-    payload: {orderBook, price, count }
+    payload: { orderBook, price, count }
   }
 }
 

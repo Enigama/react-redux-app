@@ -10,6 +10,7 @@ class ShopHeader extends Component{
   render() {
     const {price, count} = this.props
     const info = price > 0 ? ` ${count} items ($${price})` : null
+    // console.log(price, count);
 
     return (
       <header className="shop-header row">

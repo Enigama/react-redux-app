@@ -8,6 +8,7 @@ class ShoppingCartTable extends Component{
   render() {
     const { count, price } = this.props
     const { id, title} = this.props.orderBook
+
     const item = (
       <tr>
         <td>{ id }</td>

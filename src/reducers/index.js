@@ -9,8 +9,13 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'BOOKS_ORDER':
-      console.log("BOOKS_ORDER", action.payload);
-      return { ...state, ...action.payload}
+      const item = action.payload.orderBook
+      const newOrderBook = {
+        ...state.orderBook,
+        [item.id]: item
+      }
+      return { ...state, ...action.payload, orderBook: newOrderBook }
+
     case 'BOOKS_REQUESTED':
       return {...state}
     case 'BOOKS_LOADED':
