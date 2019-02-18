@@ -5,12 +5,12 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'BOOKS_REQUESTED':
+    case 'FETCH__BOOKS_REQUEST':
       return {
         books: [],
         loading: true,
       }
-    case 'BOOKS_LOADED':
+    case 'FETCH__BOOKS_LOAD':
       return {
         books: action.payload,
         loading: false

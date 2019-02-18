@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withBookstoreService } from '../hoc'
-import { booksLoaded, booksRequsted } from '../../actions'
+import { fetchBooks } from '../../actions'
 import compose from '../../utils'
 
 import BookListItem from '../bookListItem/bookListItem'
@@ -38,16 +38,9 @@ const mapStateToProps = ({ books, loading }) => {
   return { books, loading }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  const { bookstoreService } = ownProps;
+const mapDispatchToProps = (dispatch, { bookstoreService }) => {
   return {
-    fetchBooks: () => {
-      dispatch(booksRequsted());
-      bookstoreService.getBooks()
-        .then((data) => {
-          dispatch(booksLoaded(data))
-        })
-    }
+    fetchBooks: fetchBooks(bookstoreService, dispatch)
   }
 }
 
