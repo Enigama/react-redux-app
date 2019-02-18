@@ -10,12 +10,7 @@ import Spinner from "../spinner";
 
 class BookList extends Component{
   componentDidMount () {
-    const { bookstoreService, booksLoaded, booksRequsted } = this.props
-    booksRequsted()
-    bookstoreService.getBooks()
-      .then((data) => {
-        booksLoaded(data)
-    })
+    this.props.fetchBooks()
   }
 
   render () {
@@ -42,9 +37,21 @@ class BookList extends Component{
 const mapStateToProps = ({ books, loading }) => {
   return { books, loading }
 }
-                    // (dispatch) =>
-const mapDispatchToProps = {
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const { bookstoreService } = ownProps;
+  return {
+    fetchBooks: () => {
+      dispatch(booksRequsted());
+      bookstoreService.getBooks()
+        .then((data) => {
+          dispatch(booksLoaded(data))
+        })
+    }
+  }
+}
+
+// const mapDispatchToProps = {
   // return{
   //   booksLoaded: (newBooks) => {
   //     dispatch({
@@ -63,9 +70,10 @@ const mapDispatchToProps = {
   // return bindActionCreators({
   //   booksLoaded
   // }, dispatch)
-  booksLoaded,
-  booksRequsted,
-}
+  //last return
+//   booksLoaded,
+//   booksRequsted,
+// }
 
 
 export default compose(
