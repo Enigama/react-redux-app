@@ -1,64 +1,60 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withBookstoreService } from '../hoc'
-import { booksLoaded, booksRequsted, booksBuy } from '../../actions'
+
+import { fetchBooks, bookAddedToCart } from '../../actions'
 import compose from '../../utils'
 
 import BookListItem from '../bookListItem/bookListItem'
 import './bookList.css'
 import Spinner from "../spinner";
 
-class BookList extends Component{
-  state = {
-    count: 0
-  }
+const BookList = ({ books, onAddedToCart }) => {
+  return(
+    <ul className='book-list'>
+      {
+        books.map((book) => {
+          return(
+            <li key={book.id}>
+              <BookListItem
+                book={book}
+                onAddedToCart ={() => onAddedToCart(book.id)}
+              />
+            </li>
+          )
+        })
+      }
+    </ul>
+  )
+}
 
+class BookListContainer extends Component{
   componentDidMount () {
-    const { bookstoreService, booksLoaded, booksRequsted } = this.props
-    booksRequsted()
-    bookstoreService.getBooks()
-      .then((data) => {
-        const loading = false
-        booksLoaded(data, loading)
-      })
-  }
-
-  handlerBuy = (book) => {
-    const { booksBuy, price } = this.props
-    let newPrice = price + book.price
-    let count = this.state.count
-    this.setState({count: ++count})
-
-    booksBuy(book, newPrice, count)
+    this.props.fetchBooks()
   }
 
   render () {
-    const { books, loading } = this.props
+    const { books, loading, onAddedToCart } = this.props
     if (loading) {
       return <Spinner/>
     }
-    return(
-      <ul className='book-list'>
-        {
-          books.map((book) => {
-            return(
-              <li key={book.id}>
-                <BookListItem book={book} handlerBuy={this.handlerBuy}/>
-              </li>
-            )
-          })
-        }
-      </ul>
-    )
+
+    return <BookList books={books} onAddedToCart={onAddedToCart}/>
   }
 }
 
 const mapStateToProps = ({ books, orderBook, price, count}) => {
   return { books, orderBook, price, count}
 }
-                    // (dispatch) =>
-const mapDispatchToProps = {
 
+const mapDispatchToProps = (dispatch, { bookstoreService }) => {
+  return {
+    fetchBooks: fetchBooks(bookstoreService, dispatch),
+    onAddedToCart: (id) => dispatch(bookAddedToCart(id))
+  }
+}
+
+// const mapDispatchToProps = {
   // return{
   //   booksLoaded: (newBooks) => {
   //     dispatch({
@@ -77,15 +73,16 @@ const mapDispatchToProps = {
   // return bindActionCreators({
   //   booksLoaded
   // }, dispatch)
-  booksLoaded,
-  booksRequsted,
-  booksBuy,
-}
+  //last return
+//   booksLoaded,
+//   booksRequsted,
+// }
+
 
 
 export default compose(
   withBookstoreService(),
   connect(mapStateToProps, mapDispatchToProps)
-)(BookList)
+)(BookListContainer)
 
 // withBookstoreService()(connect(mapStateToProps, mapDispatchToProps)(BookList))

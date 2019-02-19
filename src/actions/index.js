@@ -1,27 +1,39 @@
 
-const booksLoaded = (books, loading) => {
-  return {
-    type: 'BOOKS_LOADED',
-    payload: {books: books, loading: loading}
-  }
-}
 
 const booksRequsted = () => {
   return {
-    type: 'BOOKS_REQUESTED',
+    type: 'FETCH_BOOKS_REQUEST',
   }
 }
 
-const booksBuy = (orderBook, price, count) => {
+const booksLoaded = (newBooks) => {
   return {
-    type: 'BOOKS_ORDER',
-    payload: { orderBook, price, count }
+    type: 'FETCH_BOOKS_LOAD',
+    payload: newBooks
   }
+}
+
+export const bookAddedToCart = (bookId) => {
+  return {
+    type: 'BOOK_ADDED_TO_CART',
+    payload: bookId
+  }
+}
+
+const fetchBooks = (bookstoreService, dispatch) => () => {
+  dispatch(booksRequsted());
+  bookstoreService.getBooks()
+    .then((data) => {
+      dispatch(booksLoaded(data))
+    })
+};
+
+export {
+  fetchBooks
 }
 
 
 export {
   booksLoaded,
   booksRequsted,
-  booksBuy
 }
