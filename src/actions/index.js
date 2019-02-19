@@ -1,14 +1,21 @@
 
 const booksRequsted = () => {
   return {
-    type: 'FETCH__BOOKS_REQUEST',
+    type: 'FETCH_BOOKS_REQUEST',
   }
 }
 
 const booksLoaded = (newBooks) => {
   return {
-    type: 'FETCH__BOOKS_LOAD',
+    type: 'FETCH_BOOKS_LOAD',
     payload: newBooks
+  }
+}
+
+export const bookAddedToCart = (bookId) => {
+  return {
+    type: 'BOOK_ADDED_TO_CART',
+    payload: bookId
   }
 }
 
