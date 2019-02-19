@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux'
+
 import './shopping-cart-table.css';
 import { connect } from 'react-redux'
+
 
 const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete}) => {
   const renderRow = (item, idx) => {
@@ -25,6 +28,28 @@ const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete}) =>
           <button className="btn btn-outline-warning btn-sm float-right"
               onClick={() => onDecrease(id)}
           >
+
+class ShoppingCartTable extends Component{
+
+  render() {
+    const { count, price } = this.props
+    const { id, title} = this.props.orderBook
+
+    const item = (
+      <tr>
+        <td>{ id }</td>
+        <td>{ title }</td>
+        <td>{ count }</td>
+        <td>{ price }</td>
+
+        <td>
+          <button className="btn btn-outline-danger btn-sm float-right">
+            <i className="fa fa-trash-o" />
+          </button>
+          <button className="btn btn-outline-success btn-sm float-right">
+            <i className="fa fa-plus-circle" />
+          </button>
+          <button className="btn btn-outline-warning btn-sm float-right">
             <i className="fa fa-minus-circle" />
           </button>
         </td>
@@ -43,8 +68,7 @@ const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete}) =>
             <th>Price</th>
             <th>Action</th>
           </tr>
-        </thead>
-
+          </thead>
         <tbody>
           { items.map(renderRow)}
         </tbody>
@@ -54,8 +78,10 @@ const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete}) =>
         Total: {total}
       </div>
     </div>
-  );
+    );
+  }
 };
+
 
 const mapStateToProps = ({ cartItems, orderTotal}) => {
   return {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withBookstoreService } from '../hoc'
+
 import { fetchBooks, bookAddedToCart } from '../../actions'
 import compose from '../../utils'
 
@@ -42,8 +43,8 @@ class BookListContainer extends Component{
   }
 }
 
-const mapStateToProps = ({ books, loading }) => {
-  return { books, loading }
+const mapStateToProps = ({ books, orderBook, price, count}) => {
+  return { books, orderBook, price, count}
 }
 
 const mapDispatchToProps = (dispatch, { bookstoreService }) => {
@@ -76,6 +77,7 @@ const mapDispatchToProps = (dispatch, { bookstoreService }) => {
 //   booksLoaded,
 //   booksRequsted,
 // }
+
 
 
 export default compose(

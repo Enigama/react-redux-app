@@ -1,4 +1,5 @@
 
+
 const booksRequsted = () => {
   return {
     type: 'FETCH_BOOKS_REQUEST',
@@ -29,4 +30,10 @@ const fetchBooks = (bookstoreService, dispatch) => () => {
 
 export {
   fetchBooks
+}
+
+
+export {
+  booksLoaded,
+  booksRequsted,
 }
