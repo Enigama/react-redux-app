@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 
-import {connect} from 'react-redux'
-import {booksBuy} from "../../actions";
-
 import './shop-header.css';
 
 class ShopHeader extends Component{
@@ -28,13 +25,6 @@ class ShopHeader extends Component{
   }
 };
 
-const mapStateToProps = ({ orderBook, price, count }) => {
-  return { orderBook, price, count}
-}
 
-const mapDispatchToProps = {
-  booksBuy,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShopHeader);
+export default ShopHeader;
 // https://github.com/rt2zz/redux-persist
