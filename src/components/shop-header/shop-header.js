@@ -1,23 +1,21 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
+import {connect} from 'react-redux'
 
 import './shop-header.css';
 
 class ShopHeader extends Component{
   render() {
-    const {price, count} = this.props
-    const info = price > 0 ? ` ${count} items ($${price})` : null
-    // console.log(price, count);
-
+    const { orderTotal, orderCount } = this.props
     return (
       <header className="shop-header row">
         <Link to="/">
           <div className="logo text-dark" >ReStore</div>
         </Link>
-        <Link to="/cart">
+        <Link to="/cart" className='shop-header__cart d-flex align-items-center'>
           <div className="shopping-cart">
             <i className="cart-icon fa fa-shopping-cart" />
-            {info}
+            {orderCount} items { orderTotal > 0 ? `($${orderTotal})` : null}
           </div>
         </Link>
       </header>
@@ -25,6 +23,11 @@ class ShopHeader extends Component{
   }
 };
 
+const mapStateToProps = ({shoppingCart:{orderTotal, orderCount}}) => {
+  return {
+    orderTotal,
+    orderCount
+  }
+}
 
-export default ShopHeader;
-// https://github.com/rt2zz/redux-persist
+export default connect(mapStateToProps)(ShopHeader);

@@ -13,7 +13,7 @@ const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete}) =>
         <td>{idx + 1}</td>
         <td>{title}</td>
         <td>{count}</td>
-        <td>{total}</td>
+        <td>${total}</td>
         <td>
           <button className="btn btn-outline-danger btn-sm float-right"
                   onClick={() => onDelete(id)}
@@ -53,7 +53,7 @@ const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete}) =>
       </table>
 
       <div className="total">
-        Total: {total}
+        Total: ${total}
       </div>
     </div>
   );
