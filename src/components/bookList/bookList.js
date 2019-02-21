@@ -43,7 +43,7 @@ class BookListContainer extends Component{
   }
 }
 
-const mapStateToProps = ({ books, orderBook, price, count}) => {
+const mapStateToProps = ({bookList: { books, orderBook, price, count}}) => {
   return { books, orderBook, price, count}
 }
 
