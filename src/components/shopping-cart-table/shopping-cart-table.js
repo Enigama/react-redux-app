@@ -6,14 +6,6 @@ import {bookAddedToCart, bookRemoveFromCart, allbooksRemoveFromCart} from '../..
 import './shopping-cart-table.css';
 
 class ShoppingCartTable extends Component{
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(prevProps, this.props);
-    if (prevProps !== this.props) {
-
-    }
-  }
-
   render() {
     const {items, total, onIncrease, onDecrease, onDelete} = this.props
     const renderRow = (item, idx) => {
@@ -26,17 +18,17 @@ class ShoppingCartTable extends Component{
           <td>${total}</td>
           <td>
             <button className="btn btn-outline-danger btn-sm float-right"
-                    onClick={() => onDelete(id)}
+                onClick={() => onDelete(id)}
             >
               <i className="fa fa-trash-o"/>
             </button>
             <button className="btn btn-outline-success btn-sm float-right"
-                    onClick={() => onIncrease(id)}
+                onClick={() => onIncrease(id)}
             >
               <i className="fa fa-plus-circle"/>
             </button>
             <button className="btn btn-outline-warning btn-sm float-right"
-                    onClick={() => onDecrease(id)}
+                onClick={() => onDecrease(id)}
             >
               <i className="fa fa-minus-circle" />
             </button>
